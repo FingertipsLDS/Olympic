@@ -506,7 +506,7 @@ async function renderSettings() {
 
     <div class="card">
       <div class="section-title">ℹ️ 关于</div>
-      <div class="muted" style="font-size:13px;line-height:1.8">健身日记 v1.0.1<br>记录运动、体重与照片的离线打卡应用。<br>数据保存在手机本地，不经过任何服务器。</div>
+      <div class="muted" style="font-size:13px;line-height:1.8">健身日记 v1.0.2<br>记录运动、体重与照片的离线打卡应用。<br>数据保存在手机本地，不经过任何服务器。</div>
     </div>`;
 
   $('#set-save').onclick = async () => {

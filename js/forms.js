@@ -19,8 +19,28 @@ function pickImage(capture) {
     const inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = 'image/*';
-    if (capture) inp.capture = 'environment';
-    inp.onchange = () => resolve(inp.files[0] || null);
+    // 安卓浏览器要求文件输入框必须挂在 DOM 里，否则 click() 不弹选择框
+    inp.style.cssText = 'position:fixed;top:0;left:-9999px;width:1px;height:1px;opacity:0;border:0;';
+    document.body.appendChild(inp);
+    if (capture) inp.setAttribute('capture', 'environment');
+
+    let done = false;
+    const cleanup = () => {
+      setTimeout(() => { if (inp.parentNode) inp.parentNode.removeChild(inp); }, 0);
+    };
+    const finish = (file) => {
+      if (done) return;
+      done = true;
+      cleanup();
+      resolve(file);
+    };
+
+    inp.onchange = () => finish(inp.files[0] || null);
+    // 用户取消选择：页面重新获得焦点但没有 change 事件
+    window.addEventListener('focus', () => { setTimeout(() => finish(inp.files[0] || null), 600); }, { once: true });
+    // 兜底清理：长时间无操作时移除输入框
+    setTimeout(() => { if (!done) finish(null); }, 120000);
+
     inp.click();
   });
 }

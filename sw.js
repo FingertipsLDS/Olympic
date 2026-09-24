@@ -1,5 +1,5 @@
 /* 健身日记 Service Worker - 离线缓存 */
-const CACHE = 'fitdiary-v2';
+const CACHE = 'fitdiary-v3';
 const ASSETS = [
   './',
   './index.html',
