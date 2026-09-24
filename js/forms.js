@@ -118,7 +118,7 @@ export function openRecordForm(initialDate, projects, onDone) {
   rebuildProjects(projectList);
   renderPhotos();
 
-  $$('[data-min]').forEach((b) => {
+  $$('#modalWrap .modal [data-min]').forEach((b) => {
     b.onclick = () => { $('#f-duration').value = b.dataset.min; };
   });
   $$('#f-intensity button').forEach((b) => {
@@ -266,7 +266,7 @@ export function openRecordDetail(r, onDone) {
     <button class="btn btn-danger btn-block" id="d-del" style="margin-top:16px">删除这条记录</button>
   `, { cls: 'sheet' });
 
-  $$('[data-pi]').forEach((img) => {
+  $$('#modalWrap .modal [data-pi]').forEach((img) => {
     img.onclick = () => openLightbox(r.photos || [], +img.dataset.pi);
   });
   $('#d-del').onclick = async () => {
@@ -300,7 +300,7 @@ export function openWeightDetail(w, onDone) {
     <button class="btn btn-danger btn-block" id="wd-del" style="margin-top:16px">删除这条记录</button>
   `, { cls: 'sheet' });
 
-  $$('[data-pi]').forEach((img) => {
+  $$('#modalWrap .modal [data-pi]').forEach((img) => {
     img.onclick = () => openLightbox(w.photos || [], +img.dataset.pi);
   });
   $('#wd-del').onclick = async () => {

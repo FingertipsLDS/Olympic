@@ -471,9 +471,9 @@ async function renderSettings() {
     <div class="card">
       <div class="section-title">🎨 外观</div>
       <div class="radio-row">
-        <button class="radio-card ${theme === 'light' ? 'active' : ''}" data-theme="light">☀️ 浅色</button>
-        <button class="radio-card ${theme === 'dark' ? 'active' : ''}" data-theme="dark">🌙 深色</button>
-        <button class="radio-card ${theme === 'auto' ? 'active' : ''}" data-theme="auto">✨ 跟随系统</button>
+        <button class="radio-card ${theme === 'light' ? 'active' : ''}" data-theme-choice="light">☀️ 浅色</button>
+        <button class="radio-card ${theme === 'dark' ? 'active' : ''}" data-theme-choice="dark">🌙 深色</button>
+        <button class="radio-card ${theme === 'auto' ? 'active' : ''}" data-theme-choice="auto">✨ 跟随系统</button>
       </div>
     </div>
 
@@ -506,7 +506,7 @@ async function renderSettings() {
 
     <div class="card">
       <div class="section-title">ℹ️ 关于</div>
-      <div class="muted" style="font-size:13px;line-height:1.8">健身日记 v1.0<br>记录运动、体重与照片的离线打卡应用。<br>数据保存在手机本地，不经过任何服务器。</div>
+      <div class="muted" style="font-size:13px;line-height:1.8">健身日记 v1.0.1<br>记录运动、体重与照片的离线打卡应用。<br>数据保存在手机本地，不经过任何服务器。</div>
     </div>`;
 
   $('#set-save').onclick = async () => {
@@ -526,10 +526,10 @@ async function renderSettings() {
     await saveSettings(patch);
     toast('已保存 🎯');
   };
-  $$('[data-theme]').forEach((b) => {
+  $$('[data-theme-choice]').forEach((b) => {
     b.onclick = async () => {
-      await saveSettings({ theme: b.dataset.theme });
-      applyTheme(b.dataset.theme);
+      await saveSettings({ theme: b.dataset.themeChoice });
+      applyTheme(b.dataset.themeChoice);
       renderSettings();
     };
   });

@@ -13,6 +13,11 @@ function show(page) {
 function registerSW() {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    // 新版本 Service Worker 接管后自动刷新一次，保证手机拿到最新代码
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (hadController) location.reload();
+    });
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 }
